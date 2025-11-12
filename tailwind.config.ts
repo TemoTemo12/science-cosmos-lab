@@ -47,6 +47,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        biology: {
+          DEFAULT: "hsl(var(--biology-primary))",
+          secondary: "hsl(var(--biology-secondary))",
+        },
+        chemistry: {
+          DEFAULT: "hsl(var(--chemistry-primary))",
+          secondary: "hsl(var(--chemistry-secondary))",
+        },
+        physics: {
+          DEFAULT: "hsl(var(--physics-primary))",
+          secondary: "hsl(var(--physics-secondary))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -57,6 +69,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundImage: {
+        'gradient-biology': 'var(--gradient-biology)',
+        'gradient-chemistry': 'var(--gradient-chemistry)',
+        'gradient-physics': 'var(--gradient-physics)',
+        'gradient-cosmic': 'var(--gradient-cosmic)',
+      },
+      boxShadow: {
+        'glow-biology': 'var(--glow-biology)',
+        'glow-chemistry': 'var(--glow-chemistry)',
+        'glow-physics': 'var(--glow-physics)',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +103,30 @@ export default {
             height: "0",
           },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "glow": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "glow": "glow 2s ease-in-out infinite",
+        "slide-up": "slide-up 0.5s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
       },
     },
   },
