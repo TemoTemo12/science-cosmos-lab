@@ -1,40 +1,53 @@
 import Navigation from "@/components/Navigation";
 import { Sparkles, Trophy, Target, Brain } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
 
 const Quiz = () => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string>("easy");
+  const [selectedSubject, setSelectedSubject] = useState<string>("mixed");
 
   const difficulties = [
     {
-      level: "Easy",
+      level: "easy",
+      label: t("quiz.easy"),
       icon: Target,
       description: "Perfect for beginners",
       color: "biology",
       questions: 10,
     },
     {
-      level: "Medium",
+      level: "medium",
+      label: t("quiz.medium"),
       icon: Brain,
       description: "Test your knowledge",
       color: "chemistry",
-      questions: 15,
+      questions: 10,
     },
     {
-      level: "Hard",
+      level: "hard",
+      label: t("quiz.hard"),
       icon: Trophy,
       description: "Challenge yourself",
       color: "physics",
-      questions: 20,
+      questions: 10,
     },
   ];
 
   const subjects = [
-    { name: "Biology", color: "biology" },
-    { name: "Chemistry", color: "chemistry" },
-    { name: "Physics", color: "physics" },
-    { name: "Mixed", color: "primary" },
+    { name: "biology", label: t("nav.biology"), color: "biology" },
+    { name: "chemistry", label: t("nav.chemistry"), color: "chemistry" },
+    { name: "physics", label: t("nav.physics"), color: "physics" },
+    { name: "mixed", label: t("quiz.mixed"), color: "primary" },
   ];
+
+  const handleStartQuiz = () => {
+    navigate(`/quiz/active?subject=${selectedSubject}&difficulty=${selectedDifficulty}`);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,17 +60,15 @@ const Quiz = () => {
             <Sparkles className="h-16 w-16 text-primary animate-float" />
             <div className="absolute h-16 w-16 blur-2xl bg-primary/30 animate-glow" />
           </div>
-          <h1 className="text-5xl font-bold mb-4">
-            Quiz Hub
-          </h1>
+          <h1 className="text-5xl font-bold mb-4">{t("quiz.title")}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Test your knowledge across Biology, Chemistry, and Physics with adaptive quizzes
+            {t("quiz.subtitle")}
           </p>
         </div>
 
         {/* Difficulty Selection */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Choose Your Challenge</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">{t("quiz.chooseChallenge")}</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {difficulties.map((diff) => {
               const Icon = diff.icon;
@@ -73,7 +84,7 @@ const Quiz = () => {
                   }`}
                 >
                   <Icon className={`h-12 w-12 text-${diff.color} mb-4`} />
-                  <h3 className="text-xl font-bold mb-2">{diff.level}</h3>
+                  <h3 className="text-xl font-bold mb-2">{diff.label}</h3>
                   <p className="text-muted-foreground mb-4">{diff.description}</p>
                   <div className="flex items-center gap-2 text-sm">
                     <div className={`h-2 w-2 rounded-full bg-${diff.color}`} />
@@ -87,14 +98,19 @@ const Quiz = () => {
 
         {/* Subject Selection */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Select Subject</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">{t("quiz.selectSubject")}</h2>
           <div className="grid md:grid-cols-4 gap-4">
             {subjects.map((subject) => (
               <button
                 key={subject.name}
-                className={`bg-card border border-border rounded-lg p-6 text-center hover:border-${subject.color} hover:shadow-glow-${subject.color} transition-all duration-300 hover:scale-105`}
+                onClick={() => setSelectedSubject(subject.name)}
+                className={`bg-card border rounded-lg p-6 text-center transition-all duration-300 hover:scale-105 ${
+                  selectedSubject === subject.name
+                    ? `border-${subject.color} shadow-glow-${subject.color}`
+                    : "border-border hover:border-primary"
+                }`}
               >
-                <p className="font-bold text-lg">{subject.name}</p>
+                <p className="font-bold text-lg">{subject.label}</p>
               </button>
             ))}
           </div>
@@ -105,30 +121,29 @@ const Quiz = () => {
           <div className="bg-card border border-border rounded-xl p-6 text-center">
             <Trophy className="h-10 w-10 text-physics mx-auto mb-3" />
             <p className="text-3xl font-bold mb-1">0</p>
-            <p className="text-muted-foreground">Quizzes Completed</p>
+            <p className="text-muted-foreground">{t("quiz.quizzesCompleted")}</p>
           </div>
           <div className="bg-card border border-border rounded-xl p-6 text-center">
             <Target className="h-10 w-10 text-biology mx-auto mb-3" />
             <p className="text-3xl font-bold mb-1">0%</p>
-            <p className="text-muted-foreground">Average Score</p>
+            <p className="text-muted-foreground">{t("quiz.averageScore")}</p>
           </div>
           <div className="bg-card border border-border rounded-xl p-6 text-center">
             <Brain className="h-10 w-10 text-chemistry mx-auto mb-3" />
             <p className="text-3xl font-bold mb-1">0</p>
-            <p className="text-muted-foreground">Achievements</p>
+            <p className="text-muted-foreground">{t("quiz.achievements")}</p>
           </div>
         </div>
 
         {/* Start Quiz Button */}
         <div className="text-center">
-          <button className="bg-primary text-primary-foreground px-8 py-4 rounded-lg text-lg font-bold hover:scale-105 transition-transform duration-300 shadow-glow-physics">
-            Start Quiz
-          </button>
-          <p className="text-sm text-muted-foreground mt-4">
-            {selectedDifficulty
-              ? `Ready to start ${selectedDifficulty.toLowerCase()} quiz!`
-              : "Select difficulty and subject to begin"}
-          </p>
+          <Button
+            onClick={handleStartQuiz}
+            size="lg"
+            className="bg-primary text-primary-foreground px-8 py-4 text-lg font-bold hover:scale-105 transition-transform duration-300 shadow-glow-physics"
+          >
+            {t("quiz.startQuiz")}
+          </Button>
         </div>
       </div>
     </div>

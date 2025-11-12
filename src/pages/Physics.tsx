@@ -1,7 +1,12 @@
 import Navigation from "@/components/Navigation";
 import { Orbit, Zap, Waves, Rocket, Sun } from "lucide-react";
+import Scene3D from "@/components/3d/Scene3D";
+import AtomModel from "@/components/3d/AtomModel";
+import { useTranslation } from "react-i18next";
 
 const Physics = () => {
+  const { t } = useTranslation();
+  
   const topics = [
     {
       title: "Forces & Motion",
@@ -47,10 +52,10 @@ const Physics = () => {
             <div className="absolute h-16 w-16 blur-2xl bg-physics/30 animate-glow" />
           </div>
           <h1 className="text-5xl font-bold mb-4 bg-gradient-physics bg-clip-text text-transparent">
-            Physics Zone
+            {t("physics.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore the fundamental laws that govern our universe, from quantum mechanics to cosmic phenomena
+            {t("physics.subtitle")}
           </p>
         </div>
 
@@ -61,20 +66,19 @@ const Physics = () => {
             <div className="relative z-10">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <Rocket className="h-6 w-6 text-physics" />
-                Try It Yourself - Physics Simulator
+                {t("physics.simulator")}
               </h2>
               <p className="text-muted-foreground mb-6">
-                Adjust variables and see real-time effects on motion, energy, and forces
+                {t("physics.simulatorDescription")}
               </p>
-              <div className="aspect-video bg-muted/50 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <Orbit className="h-24 w-24 text-physics mx-auto mb-4 animate-float" />
-                  <p className="text-muted-foreground">Interactive physics engine coming soon</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Experiment with gravity, velocity, and forces
-                  </p>
-                </div>
+              <div className="h-96 rounded-lg overflow-hidden mb-4">
+                <Scene3D>
+                  <AtomModel />
+                </Scene3D>
               </div>
+              <p className="text-sm text-muted-foreground text-center">
+                Interactive 3D atom model - drag to rotate, scroll to zoom
+              </p>
             </div>
           </div>
         </div>
@@ -109,10 +113,10 @@ const Physics = () => {
         <div className="mt-16 bg-card border border-border rounded-2xl p-8 hover:border-physics hover:shadow-glow-physics transition-all duration-300">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
             <Zap className="h-6 w-6 text-physics" />
-            Force & Motion Calculator
+            {t("physics.calculator")}
           </h2>
           <p className="text-muted-foreground mb-6">
-            Calculate forces, acceleration, velocity, and more with our interactive physics calculator
+            {t("physics.calculatorDescription")}
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">

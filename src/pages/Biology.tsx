@@ -1,7 +1,12 @@
 import Navigation from "@/components/Navigation";
 import { Dna, Microscope, Leaf, Heart, Users } from "lucide-react";
+import Scene3D from "@/components/3d/Scene3D";
+import DNAHelix from "@/components/3d/DNAHelix";
+import { useTranslation } from "react-i18next";
 
 const Biology = () => {
+  const { t } = useTranslation();
+  
   const topics = [
     {
       title: "Cells",
@@ -47,10 +52,10 @@ const Biology = () => {
             <div className="absolute h-16 w-16 blur-2xl bg-biology/30 animate-glow" />
           </div>
           <h1 className="text-5xl font-bold mb-4 bg-gradient-biology bg-clip-text text-transparent">
-            Biology Zone
+            {t("biology.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Discover the wonders of living organisms, from microscopic cells to complex ecosystems
+            {t("biology.subtitle")}
           </p>
         </div>
 
@@ -61,16 +66,13 @@ const Biology = () => {
             <div className="relative z-10">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <Dna className="h-6 w-6 text-biology" />
-                Interactive DNA Structure
+                {t("biology.dnaViewer")}
               </h2>
-              <div className="aspect-video bg-muted/50 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <Dna className="h-24 w-24 text-biology mx-auto mb-4 animate-float" />
-                  <p className="text-muted-foreground">3D DNA visualization coming soon</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Explore base pairs, genes, and chromosomes
-                  </p>
-                </div>
+              <p className="text-muted-foreground mb-6">{t("biology.dnaDescription")}</p>
+              <div className="h-96 rounded-lg overflow-hidden">
+                <Scene3D>
+                  <DNAHelix />
+                </Scene3D>
               </div>
             </div>
           </div>
@@ -106,10 +108,10 @@ const Biology = () => {
         <div className="mt-16 bg-card border border-border rounded-2xl p-8 hover:border-biology hover:shadow-glow-biology transition-all duration-300">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
             <Microscope className="h-6 w-6 text-biology" />
-            Learn by Dissection
+            {t("biology.dissection")}
           </h2>
           <p className="text-muted-foreground mb-6">
-            Explore organisms layer by layer with our virtual dissection tool. Safe, interactive, and educational.
+            {t("biology.dissectionDescription")}
           </p>
           <div className="aspect-video bg-muted/50 rounded-lg flex items-center justify-center">
             <div className="text-center">

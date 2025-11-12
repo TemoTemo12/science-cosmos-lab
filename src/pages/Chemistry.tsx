@@ -1,7 +1,13 @@
 import Navigation from "@/components/Navigation";
 import { Atom, Beaker, FlaskConical, TestTube, Droplet } from "lucide-react";
+import PeriodicTable from "@/components/PeriodicTable";
+import Scene3D from "@/components/3d/Scene3D";
+import MoleculeModel from "@/components/3d/MoleculeModel";
+import { useTranslation } from "react-i18next";
 
 const Chemistry = () => {
+  const { t } = useTranslation();
+  
   const topics = [
     {
       title: "Periodic Table",
@@ -47,10 +53,10 @@ const Chemistry = () => {
             <div className="absolute h-16 w-16 blur-2xl bg-chemistry/30 animate-glow" />
           </div>
           <h1 className="text-5xl font-bold mb-4 bg-gradient-chemistry bg-clip-text text-transparent">
-            Chemistry Zone
+            {t("chemistry.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Unlock the secrets of matter, from atomic structures to complex chemical reactions
+            {t("chemistry.subtitle")}
           </p>
         </div>
 
@@ -61,17 +67,10 @@ const Chemistry = () => {
             <div className="relative z-10">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <Atom className="h-6 w-6 text-chemistry" />
-                Interactive Periodic Table
+                {t("chemistry.periodicTable")}
               </h2>
-              <div className="aspect-video bg-muted/50 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <Atom className="h-24 w-24 text-chemistry mx-auto mb-4 animate-float" />
-                  <p className="text-muted-foreground">Clickable periodic table coming soon</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Click elements to see properties, history, and uses
-                  </p>
-                </div>
-              </div>
+              <p className="text-muted-foreground mb-6">{t("chemistry.periodicDescription")}</p>
+              <PeriodicTable />
             </div>
           </div>
         </div>
@@ -102,14 +101,30 @@ const Chemistry = () => {
           })}
         </div>
 
+        {/* 3D Molecule Viewer */}
+        <div className="mt-16 bg-card border border-border rounded-2xl p-8 hover:border-chemistry hover:shadow-glow-chemistry transition-all duration-300">
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <Atom className="h-6 w-6 text-chemistry" />
+            3D Molecule Viewer
+          </h2>
+          <p className="text-muted-foreground mb-6">
+            Explore molecular structures in 3D. Rotate and examine water (H₂O) molecules.
+          </p>
+          <div className="h-96 rounded-lg overflow-hidden">
+            <Scene3D>
+              <MoleculeModel type="water" />
+            </Scene3D>
+          </div>
+        </div>
+
         {/* Mix & Discover Feature */}
         <div className="mt-16 bg-card border border-border rounded-2xl p-8 hover:border-chemistry hover:shadow-glow-chemistry transition-all duration-300">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
             <Beaker className="h-6 w-6 text-chemistry" />
-            Mix & Discover - Virtual Lab
+            {t("chemistry.virtualLab")}
           </h2>
           <p className="text-muted-foreground mb-6">
-            Experiment safely with our virtual chemistry lab. Mix compounds, observe reactions, and learn without danger.
+            {t("chemistry.labDescription")}
           </p>
           <div className="grid md:grid-cols-3 gap-4 mb-6">
             <div className="bg-muted/50 rounded-lg p-4 text-center">

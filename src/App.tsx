@@ -8,8 +8,10 @@ import Biology from "./pages/Biology";
 import Chemistry from "./pages/Chemistry";
 import Physics from "./pages/Physics";
 import Quiz from "./pages/Quiz";
+import QuizActive from "./pages/QuizActive";
 import Connections from "./pages/Connections";
 import NotFound from "./pages/NotFound";
+import "./i18n/config";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,7 @@ const App = () => (
           <Route path="/chemistry" element={<Chemistry />} />
           <Route path="/physics" element={<Physics />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz/active" element={<QuizActive />} />
           <Route path="/connections" element={<Connections />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
